@@ -1,0 +1,208 @@
+// C++ program to implement recursive Binary Search 
+
+#include <bits/stdc++.h> 
+using namespace std; 
+
+int arrn[5] = {0,1,2,3,4};
+
+
+int binarySearch_i(int arr[], int l, int r, int x) 
+{ 
+    while (l <= r) { 
+        int m = l + (r - l) / 2; 
+  
+        // Check if x is present at mid 
+        if (arr[m] == x) 
+            return m; 
+  
+        // If x greater, ignore left half 
+        if (arr[m] < x) 
+            l = m + 1; 
+  
+        // If x is smaller, ignore right half 
+        else
+            r = m - 1; 
+    } 
+  
+    return -1; 
+} 
+
+
+int binarySearch_c(char arr[], char x,int n) 
+    { 
+        int l = 0 ; 
+        int r = n - 1; 
+        while (l <= r)  
+        { 
+            int m = l + (r - l) / 2; 
+  
+        int res; 
+        if (x == (arr[m])) 
+            res = 0; 
+              
+  
+            // Check if x is present at mid 
+            if (res == 0) 
+                return m; 
+  
+            // If x greater, ignore left half 
+            if (x > (arr[m])) 
+                l = m + 1; 
+  
+            // If x is smaller, ignore right half 
+            else
+                r = m - 1; 
+        } 
+  
+        return -1; 
+    } 
+    
+
+int binarySearch_s(string arr[], string x,int n) 
+    { 
+        
+        int l = 0 ; 
+        int r = n - 1; 
+        while (l <= r)  
+        { 
+            int m = l + (r - l) / 2; 
+  
+            int res; 
+            if (x == (arr[m])) 
+                res = 0; 
+              
+  
+            if (res == 0) 
+                return m; 
+  
+            if (x > (arr[m])) 
+                l = m + 1; 
+  
+            else
+                r = m - 1; 
+        } 
+  
+        return -1; 
+    } 
+  
+void swap(int *xp, int *yp) 
+{ 
+	int temp = *xp; 
+	*xp = *yp; 
+	*yp = temp; 
+} 
+void printArray(int arr[], int size) 
+{ 
+	int i; 
+	for (i=0; i < size; i++) 
+		cout << arr[i] << " "; 
+	cout << endl; 
+}   
+
+void Sort(int arr[], int n) 
+{ 
+	int i, j; 
+    for (i = 0; i < n-1; i++)      
+        for (j = 0; j < n-i-1; j++)  
+          if (arr[j] > arr[j+1])  
+            {
+              swap(&arr[j], &arr[j+1]);
+              swap(&arrn[j], &arrn[j+1]);
+            }
+//        printArray(arrn, n);      //UNCOMMENT TO SEE SORTING ORDER. 
+//       printArray(arr, n);        //UNCOMMENT TO SEE SORTED ORDER.
+	
+} 
+int binarySearch_us(int arr[], int l, int r, int x) 
+    { 
+        Sort(arr, r+1); 
+     
+    while (l <= r) { 
+        int m = l + (r - l) / 2; 
+  
+        if (arr[m] == x) 
+            return arrn[m]; 
+  
+        if (arr[m] < x) 
+            l = m + 1; 
+  
+        else
+            r = m - 1; 
+    } 
+  
+    return -1; 
+    } 
+
+
+
+int main(void) 
+{ 
+    int ch, x, arr_i[5],n,result;
+    char c, arr_c[5];
+    string arr_s[5],s;
+    cout<<"Which Binary Search you want to check :\n1.>Numeric ,\n2.>Character ,\n3.>String ,\n4.>Unsorted data";
+    cin>>ch;
+    switch(ch)
+    {
+        case 1:     cout<<"\nEnter 5 numbers for the array :\n";
+                    for(int i = 0; i<5; i++)
+                       cin>>arr_i[i];
+                    cout<<"\nEnter the number to be searched :\n";
+                    cin>>x;
+                    n = sizeof(arr_i) / sizeof(arr_i[0]); 
+                    result = binarySearch_i(arr_i, 0, n - 1, x); 
+                    (result == -1) ? cout << "Element is not present in array"
+                    : cout << "Element is present at index " << result; 
+                   
+                    break;
+    
+        case 2:     cout<<"\nEnter 5 characters for Array:\n";
+                    for(int i = 0; i<5; i++)
+                       cin>>arr_c[i];
+                    cout<<"\nEnter the character to be searched :\n";
+                    cin>>c; 
+                    n = sizeof(arr_c) / sizeof(arr_c[0]);
+                    result = binarySearch_c(arr_c, c,n); 
+  
+                    if (result == -1) 
+                       cout << ("Element not present"); 
+                    else
+                       cout << ("Element found at index ") << result; 
+                    
+                    break;
+
+        case 3:     cout<<"\nEnter 5 strings for Array:\n";
+                    for(int i = 0; i<5; i++)
+                       cin>>arr_s[i];
+                    cout<<"\nEnter the string to be searched :\n";
+                    cin>>s; 
+                    n = sizeof(arr_s) / sizeof(arr_s[0]); 
+                    
+                    result = binarySearch_s(arr_s, s,n); 
+  
+                    if (result == -1) 
+                       cout << ("Element not present"); 
+                    else
+                       cout << ("Element found at index ") << result; 
+                    
+                    break;
+                    
+        case 4:     cout<<"\nEnter 5 numbers for the array :\n";
+                    for(int i = 0; i<5; i++)
+                       cin>>arr_i[i];
+                    cout<<"\nEnter the number to be searched :\n";
+                    cin>>x;
+                    n = sizeof(arr_i) / sizeof(arr_i[0]); 
+                    
+                    result = binarySearch_us(arr_i, 0, n - 1, x); 
+                    (result == -1) ? cout << "Element is not present in array"
+                    : cout << "Element is present at index " << result; 
+                  
+                    break;
+      
+        default:    cout<<"\nInvalid Option.";
+                    break;
+  
+    }
+    return 0; 
+}
